@@ -22,7 +22,11 @@ eventEmitter.processInput = (string) => {
     let matchFound = false;
 
     config.availableOperations.some((operation) => {
-      if (string.toLowerCase().startsWith(operation)) {
+      if (
+        string.toLowerCase().startsWith(operation) &&
+        (string[operation.length] === " " ||
+          string[operation.length] === undefined)
+      ) {
         matchFound = true;
         eventEmitter.e.emit(operation, string);
         return true;
@@ -31,6 +35,7 @@ eventEmitter.processInput = (string) => {
 
     if (!matchFound) {
       console.log("Invalid input");
+      cli.workingDir.print();
     }
   }
 };
