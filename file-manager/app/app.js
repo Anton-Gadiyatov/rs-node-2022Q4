@@ -6,7 +6,7 @@
 // Dependencies
 import readline from "node:readline";
 import os from "node:os";
-import { cli } from "../modules/index.js";
+import { cli, eventEmitter } from "../modules/index.js";
 
 // Instantiate the app object
 export const app = {};
@@ -24,7 +24,9 @@ app.init = () => {
   }
 
   // Get username from args
-  const { username } = cli.args.parseInitArgs();
+  const username = cli.args.parseInitArgs().username
+    ? cli.args.parseInitArgs().username
+    : "Mr(s) inkognito";
   // Colorize username
   const colorizedUsername = cli.colorizer.colorizeString(33, username);
   cli.cliDrawer.centered(`Welcome to the File Manager, ${colorizedUsername}!`);
@@ -46,7 +48,7 @@ app.init = () => {
   // Handle each line of input separately
   _interface.on("line", async (string) => {
     // Send to the input processor
-    await app.processInput(string);
+    await eventEmitter.processInput(string);
     // Loging current working directory
     console.log(
       cli.colorizer.colorizeString(32, `You are currently in ${process.cwd()}`)
