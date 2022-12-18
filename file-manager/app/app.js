@@ -11,6 +11,9 @@ export const app = {};
 
 // Init function
 app.init = () => {
+  // Get username from args
   const { username } = cli.args.parseInitArgs();
-  console.log(username);
+  // Colorize username
+  const colorizedUsername = cli.colorizer.colorizeString(33, username);
+  cli.cliDrawer.centered(`Welcome to the File Manager, ${colorizedUsername}!`);
 };
