@@ -46,13 +46,10 @@ app.init = () => {
   _interface.prompt();
 
   // Handle each line of input separately
-  _interface.on("line", async (string) => {
+  _interface.on("line", (string) => {
     // Send to the input processor
-    await eventEmitter.processInput(string);
+    eventEmitter.processInput(string);
     // Loging current working directory
-    console.log(
-      cli.colorizer.colorizeString(32, `You are currently in ${process.cwd()}`)
-    );
   });
 
   // On killing the interface with CTRL + C

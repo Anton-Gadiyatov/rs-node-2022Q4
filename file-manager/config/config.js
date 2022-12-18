@@ -7,4 +7,19 @@
 export const config = {};
 
 // File-manager available operations
-config.availableOperations = ["up", ".exit", "cd"];
+config.availableOperations = [
+  "up",
+  ".exit",
+  "cd",
+  "ls",
+  "cat",
+  "add",
+  "rn",
+  "cp",
+  "mv",
+  "rm",
+  "os",
+  "hash",
+  "compress",
+  "decompress",
+];

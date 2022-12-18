@@ -18,12 +18,11 @@ eventEmitter.e = new _emitter();
 // Validation operations
 eventEmitter.processInput = (string) => {
   string = typeof string === "string" && string.trim().length > 0 ? string : "";
-
   if (string) {
     let matchFound = false;
 
     config.availableOperations.some((operation) => {
-      if (string.toLowerCase().includes(operation)) {
+      if (string.toLowerCase().startsWith(operation)) {
         matchFound = true;
         eventEmitter.e.emit(operation, string);
         return true;
@@ -43,9 +42,53 @@ eventEmitter.e.on(".exit", () => {
 });
 
 eventEmitter.e.on("up", () => {
-  cli.responders.up();
+  cli.responders.up(cli.workingDir.print);
 });
 
 eventEmitter.e.on("cd", (string) => {
-  cli.responders.cd(string);
+  cli.responders.cd(string, cli.workingDir.print);
+});
+
+eventEmitter.e.on("ls", (string) => {
+  cli.responders.ls(string);
+});
+
+eventEmitter.e.on("cat", (string) => {
+  cli.responders.cat(string);
+});
+
+eventEmitter.e.on("add", (string) => {
+  cli.responders.add(string);
+});
+
+eventEmitter.e.on("rn", (string) => {
+  cli.responders.rn(string);
+});
+
+eventEmitter.e.on("cp", (string) => {
+  cli.responders.cp(string);
+});
+
+eventEmitter.e.on("mv", (string) => {
+  cli.responders.mv(string);
+});
+
+eventEmitter.e.on("rm", (string) => {
+  cli.responders.rm(string);
+});
+
+eventEmitter.e.on("os", (string) => {
+  cli.responders.os(string, cli.workingDir.print);
+});
+
+eventEmitter.e.on("hash", (string) => {
+  cli.responders.hash(string, cli.workingDir.print);
+});
+
+eventEmitter.e.on("compress", (string) => {
+  cli.responders.compress(string);
+});
+
+eventEmitter.e.on("decompress", (string) => {
+  cli.responders.decompress(string);
 });
