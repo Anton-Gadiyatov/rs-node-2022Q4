@@ -41,3 +41,7 @@ eventEmitter.processInput = (string) => {
 eventEmitter.e.on(".exit", () => {
   cli.responders.exit();
 });
+
+eventEmitter.e.on("up", () => {
+  cli.responders.up();
+});

@@ -43,7 +43,7 @@ app.init = () => {
   });
 
   // Create an initial prompt
-  _interface.prompt(123);
+  _interface.prompt();
 
   // Handle each line of input separately
   _interface.on("line", async (string) => {
