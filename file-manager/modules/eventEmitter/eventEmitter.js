@@ -45,3 +45,7 @@ eventEmitter.e.on(".exit", () => {
 eventEmitter.e.on("up", () => {
   cli.responders.up();
 });
+
+eventEmitter.e.on("cd", (string) => {
+  cli.responders.cd(string);
+});

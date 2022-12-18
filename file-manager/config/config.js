@@ -7,4 +7,4 @@
 export const config = {};
 
 // File-manager available operations
-config.availableOperations = ["up", ".exit"];
+config.availableOperations = ["up", ".exit", "cd"];
