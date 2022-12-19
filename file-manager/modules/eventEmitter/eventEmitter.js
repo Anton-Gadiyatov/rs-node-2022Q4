@@ -14,6 +14,7 @@ export const eventEmitter = {};
 // Instantiate event emitter
 class _emitter extends EventEmitter {}
 eventEmitter.e = new _emitter();
+eventEmitter.e.setMaxListeners(0);
 
 // Validation operations
 eventEmitter.processInput = (string) => {
@@ -59,7 +60,7 @@ eventEmitter.e.on("ls", () => {
 });
 
 eventEmitter.e.on("cat", (string) => {
-  cli.responders.cat(string);
+  cli.responders.cat(string, cli.workingDir.print);
 });
 
 eventEmitter.e.on("add", (string) => {
