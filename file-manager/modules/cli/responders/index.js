@@ -10,3 +10,4 @@ export { compressResponder as compress } from "./compress/compress.js";
 export { decompressResponder as decompress } from "./decompress/decompress.js";
 export { mvResponder as mv } from "./mv/mv.js";
 export { rmResponder as rm } from "./rm/rm.js";
+export { rnResponder as rn } from "./rn/rn.js";

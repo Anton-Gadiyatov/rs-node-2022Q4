@@ -68,11 +68,11 @@ eventEmitter.e.on("add", (string) => {
 });
 
 eventEmitter.e.on("rn", (string) => {
-  cli.responders.rn(string);
+  cli.responders.rn(string, cli.workingDir.print);
 });
 
 eventEmitter.e.on("cp", (string) => {
-  cli.responders.cp(string);
+  cli.responders.cp(string, cli.workingDir.print);
 });
 
 eventEmitter.e.on("mv", (string) => {
