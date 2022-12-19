@@ -50,7 +50,7 @@ export const decompressResponder = async (string, callback) => {
         await pipeline(readableStream, brotliDecompress, writeStream);
         callback();
       } catch (err) {
-        console.log("Operation failed", err);
+        console.log("Operation failed");
         callback();
       }
     } else {

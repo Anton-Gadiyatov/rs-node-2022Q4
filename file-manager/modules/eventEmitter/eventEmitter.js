@@ -76,7 +76,7 @@ eventEmitter.e.on("cp", (string) => {
 });
 
 eventEmitter.e.on("mv", (string) => {
-  cli.responders.mv(string);
+  cli.responders.mv(string, cli.workingDir.print);
 });
 
 eventEmitter.e.on("rm", (string) => {

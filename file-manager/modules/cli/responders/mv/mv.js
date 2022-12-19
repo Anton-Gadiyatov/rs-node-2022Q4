@@ -1,17 +1,17 @@
 /*
- * CLI responder compress
+ * CLI responder nv
  *
  */
 
 // Dependencies
 import { createReadStream, createWriteStream } from "node:fs";
-import { lstat } from "node:fs/promises";
+import { lstat, unlink } from "node:fs/promises";
 import { join, parse, resolve } from "node:path";
 import { pipeline } from "node:stream/promises";
 import { createBrotliCompress } from "node:zlib";
 
-// Compress file and save to new file
-export const compressResponder = async (string, callback) => {
+// Moves file to new place
+export const mvResponder = async (string, callback) => {
   string =
     typeof string === "string" && string.trim().length > 0
       ? string.trim()
@@ -39,14 +39,13 @@ export const compressResponder = async (string, callback) => {
         }
         const pathToFile = join(process.cwd(), fileName);
         const { base } = parse(pathToFile);
-        const newFileName = `${base}.br`;
 
-        const pathToDirectory = resolve(outputDir, newFileName);
+        const pathToDirectory = resolve(outputDir, base);
 
-        const brotliCompress = createBrotliCompress();
         const readableStream = createReadStream(pathToFile);
         const writeStream = createWriteStream(pathToDirectory);
-        await pipeline(readableStream, brotliCompress, writeStream);
+        await pipeline(readableStream, writeStream);
+        await unlink(pathToFile);
         callback();
       } catch (err) {
         console.log("Operation failed");

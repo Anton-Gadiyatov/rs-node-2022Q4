@@ -8,3 +8,4 @@ export { addResponder as add } from "./add/add.js";
 export { catResponder as cat } from "./cat/cat.js";
 export { compressResponder as compress } from "./compress/compress.js";
 export { decompressResponder as decompress } from "./decompress/decompress.js";
+export { mvResponder as mv } from "./mv/mv.js";

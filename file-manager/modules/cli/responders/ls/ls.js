@@ -25,7 +25,7 @@ export const lsResponder = async (callback) => {
     let header = `\x1b[33m${"(index)"}\x1b[0m`;
     header += padding(1, header.length);
     header += "Name";
-    header += padding(4, header.length + 7);
+    header += padding(4, header.length + 9);
     header += "Type";
     console.log(header);
     cliDrawer.horizontalLine();
