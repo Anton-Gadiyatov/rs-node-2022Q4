@@ -54,8 +54,8 @@ eventEmitter.e.on("cd", (string) => {
   cli.responders.cd(string, cli.workingDir.print);
 });
 
-eventEmitter.e.on("ls", (string) => {
-  cli.responders.ls(string);
+eventEmitter.e.on("ls", () => {
+  cli.responders.ls(cli.workingDir.print);
 });
 
 eventEmitter.e.on("cat", (string) => {
@@ -63,7 +63,7 @@ eventEmitter.e.on("cat", (string) => {
 });
 
 eventEmitter.e.on("add", (string) => {
-  cli.responders.add(string);
+  cli.responders.add(string, cli.workingDir.print);
 });
 
 eventEmitter.e.on("rn", (string) => {

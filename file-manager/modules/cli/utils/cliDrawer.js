@@ -25,3 +25,19 @@ cliDrawer.centered = (string) => {
   line += string;
   console.log(line);
 };
+
+cliDrawer.horizontalLine = () => {
+  const width = process.stdout.columns;
+  let line = "";
+  for (let i = 0; i < width; i++) {
+    line += "-";
+  }
+  console.log(line);
+};
+
+cliDrawer.verticalSpace = (lines) => {
+  lines = typeof lines === "number" && lines > 0 ? lines : 1;
+  for (let i = 0; i < lines; i++) {
+    console.log("");
+  }
+};
