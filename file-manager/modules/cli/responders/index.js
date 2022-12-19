@@ -6,3 +6,5 @@ export { upResponder as up } from "./up/up.js";
 export { lsResponder as ls } from "./ls/ls.js";
 export { addResponder as add } from "./add/add.js";
 export { catResponder as cat } from "./cat/cat.js";
+export { compressResponder as compress } from "./compress/compress.js";
+export { decompressResponder as decompress } from "./decompress/decompress.js";

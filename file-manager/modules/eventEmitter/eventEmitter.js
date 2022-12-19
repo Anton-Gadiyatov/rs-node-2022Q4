@@ -92,9 +92,9 @@ eventEmitter.e.on("hash", (string) => {
 });
 
 eventEmitter.e.on("compress", (string) => {
-  cli.responders.compress(string);
+  cli.responders.compress(string, cli.workingDir.print);
 });
 
 eventEmitter.e.on("decompress", (string) => {
-  cli.responders.decompress(string);
+  cli.responders.decompress(string, cli.workingDir.print);
 });
