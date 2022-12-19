@@ -80,7 +80,7 @@ eventEmitter.e.on("mv", (string) => {
 });
 
 eventEmitter.e.on("rm", (string) => {
-  cli.responders.rm(string);
+  cli.responders.rm(string, cli.workingDir.print);
 });
 
 eventEmitter.e.on("os", (string) => {

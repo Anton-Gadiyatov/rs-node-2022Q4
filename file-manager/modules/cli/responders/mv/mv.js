@@ -1,5 +1,5 @@
 /*
- * CLI responder nv
+ * CLI responder mv
  *
  */
 
@@ -8,7 +8,6 @@ import { createReadStream, createWriteStream } from "node:fs";
 import { lstat, unlink } from "node:fs/promises";
 import { join, parse, resolve } from "node:path";
 import { pipeline } from "node:stream/promises";
-import { createBrotliCompress } from "node:zlib";
 
 // Moves file to new place
 export const mvResponder = async (string, callback) => {
