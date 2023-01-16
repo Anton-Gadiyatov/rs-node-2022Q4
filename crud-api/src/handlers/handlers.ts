@@ -19,6 +19,11 @@ const handlers = (
     usersController.getUser(request, response);
   } else if (request.url === "/api/users" && request.method === "POST") {
     usersController.createUser(request, response);
+  } else if (
+    request.url.startsWith("/api/users/") &&
+    request.method === "PUT"
+  ) {
+    usersController.updateUser(request, response);
   } else {
     response.writeHead(404, APPLICATION_JSON_TYPE);
     response.end(

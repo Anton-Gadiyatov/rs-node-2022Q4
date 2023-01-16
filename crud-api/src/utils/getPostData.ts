@@ -1,4 +1,4 @@
-const getPostData = (request) => {
+const getPostData = (request): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
       let body = "";
