@@ -1,6 +1,6 @@
 import { User } from "../types/user.js";
 
-const validateUser = ({ username, age, hobbies }: User) => {
+const validateUser = ({ username, age, hobbies }: Partial<User>) => {
   if (!username || typeof username !== "string" || username.trim().length < 0) {
     return false;
   }

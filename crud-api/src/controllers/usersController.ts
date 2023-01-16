@@ -1,7 +1,10 @@
+import { randomUUID } from "crypto";
 import http from "http";
 import { usersData } from "../database/data.js";
 import { APPLICATION_JSON_TYPE } from "../types/constants/constants.js";
+import { User } from "../types/user.js";
 import { getPostData } from "../utils/getPostData.js";
+import { validateUser } from "../utils/validateUser.js";
 
 const getUsers = async (
   request: http.IncomingMessage,
@@ -50,23 +53,34 @@ const getUser = (
   }
 };
 
-const createUser = (
+const createUser = async (
   request: http.IncomingMessage,
   response: http.ServerResponse<http.IncomingMessage> & {
     req: http.IncomingMessage;
   }
-) => {};
+) => {
+  try {
+    const data = (await getPostData(request)) as Partial<User>;
+    const { username, age, hobbies } = data;
+    const userData = { username, age, hobbies } as User;
+    const isUserDataValid = validateUser(userData);
+    if (!isUserDataValid) {
+      response.writeHead(400, APPLICATION_JSON_TYPE);
+      response.end(JSON.stringify({ message: "User data is not valid" }));
+    } else {
+      userData.id = randomUUID();
+      usersData.push(userData);
+      response.writeHead(200, APPLICATION_JSON_TYPE);
+      response.end(JSON.stringify(userData));
+    }
+  } catch (error) {
+    console.log(error);
+    response.writeHead(500, APPLICATION_JSON_TYPE);
+    response.end(JSON.stringify({ message: "Internal server error" }));
+  }
+};
 
 export { getUsers, getUser, createUser };
-
-// const data = getPostData(request);
-// const { username, age, hobbies } = data;
-// const userData = { username, age, hobbies };
-// const user = {
-//   id: randomUUID(),
-// };
-// response.writeHead(200, APPLICATION_JSON_TYPE);
-// response.end(JSON.stringify(usersData));
 
 // const createProduct = async (request, response) => {
 //   try {
