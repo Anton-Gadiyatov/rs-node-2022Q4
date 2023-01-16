@@ -1,6 +1,6 @@
 import http from "node:http";
 import * as usersController from "../controllers/usersController.js";
-import { usersData } from "../database/data.js";
+import { usersData } from "../../database/data.js";
 import { APPLICATION_JSON_TYPE } from "../types/constants/constants.js";
 import { getPostData } from "../utils/getPostData.js";
 

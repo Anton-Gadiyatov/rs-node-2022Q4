@@ -54,4 +54,12 @@ const validateUpdateUser = ({ username, age, hobbies }: Partial<User>) => {
   }
   return true;
 };
-export { validateCreateUser, validateUpdateUser };
+
+const uuidRegexExp =
+  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
+
+const validateUserId = (id) => {
+  return uuidRegexExp.test(id);
+};
+
+export { validateCreateUser, validateUpdateUser, validateUserId };

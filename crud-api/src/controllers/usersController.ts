@@ -1,16 +1,14 @@
 import { randomUUID } from "crypto";
 import http from "http";
-import { usersData } from "../database/data.js";
+import { usersData } from "../../database/data.js";
 import { APPLICATION_JSON_TYPE } from "../types/constants/constants.js";
 import { User } from "../types/user.js";
 import { getPostData } from "../utils/getPostData.js";
 import {
   validateCreateUser,
   validateUpdateUser,
+  validateUserId,
 } from "../utils/validateUser.js";
-
-const uuidRegexExp =
-  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 
 const getUsers = async (
   request: http.IncomingMessage,
@@ -36,7 +34,7 @@ const getUser = (
 ) => {
   try {
     const id = request.url.split("/")[3];
-    if (!id || !uuidRegexExp.test(id)) {
+    if (!id || !validateUserId(id)) {
       response.writeHead(400, APPLICATION_JSON_TYPE);
       response.end(JSON.stringify({ message: "userId is not a valid uuid" }));
     } else {
@@ -74,7 +72,7 @@ const createUser = async (
     } else {
       const userData = { id: randomUUID(), username, age, hobbies } as User;
       usersData.push(userData);
-      response.writeHead(200, APPLICATION_JSON_TYPE);
+      response.writeHead(201, APPLICATION_JSON_TYPE);
       response.end(JSON.stringify(userData));
     }
   } catch (error) {
@@ -92,7 +90,7 @@ const updateUser = async (
 ) => {
   try {
     const id = request.url.split("/")[3];
-    if (!id || !uuidRegexExp.test(id)) {
+    if (!id || !validateUserId(id)) {
       response.writeHead(400, APPLICATION_JSON_TYPE);
       response.end(JSON.stringify({ message: "userId is not a valid uuid" }));
     } else {
@@ -138,7 +136,7 @@ const deleteUser = (
 ) => {
   try {
     const id = request.url.split("/")[3];
-    if (!id || !uuidRegexExp.test(id)) {
+    if (!id || !validateUserId(id)) {
       response.writeHead(400, APPLICATION_JSON_TYPE);
       response.end(JSON.stringify({ message: "userId is not a valid uuid" }));
     } else {
