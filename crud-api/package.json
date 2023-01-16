@@ -7,6 +7,7 @@
   "scripts": {
     "start:prod": "tsc && node dist/index.js",
     "start:dev": "nodemon --exec ts-node-esm src/index.ts",
+    "start:multy": "nodemon --exec ts-node-esm src/cluster.ts",
     "test": "ts-node-esm src/tests/integration/users.test.ts"
   },
   "keywords": [],

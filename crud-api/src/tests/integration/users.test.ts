@@ -181,14 +181,14 @@ test("Users Integration Test Suite 1", async (t) => {
     const result = await getRequest.json();
     assert.deepStrictEqual(result, []);
 
-    const failGetRequest = await fetch(`${testServerAdress}/asdasdasd`);
+    const failRouteRequest = await fetch(`http://localhost:${TEST_PORT}/api/user`);
     assert.deepStrictEqual(
-      getRequest.headers.get("Content-Type"),
+      failRouteRequest.headers.get("Content-Type"),
       "application/json"
     );
 
-    assert.strictEqual(failGetRequest.status, 404);
-    const failResult = await getRequest.json();
+    assert.strictEqual(failRouteRequest.status, 404);
+    const failResult = await failRouteRequest.json();
     assert.deepStrictEqual(
       failResult.message,
       "You tried to access not existing route"
