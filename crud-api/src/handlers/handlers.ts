@@ -1,7 +1,8 @@
 import http from "node:http";
+import * as usersController from "../controllers/usersController.js";
 import { usersData } from "../database/data.js";
-
-const APPLICATION_JSON_TYPE = { "Content-Type": "application/json" };
+import { APPLICATION_JSON_TYPE } from "../types/constants/constants.js";
+import { getPostData } from "../utils/getPostData.js";
 
 const handlers = (
   request: http.IncomingMessage,
@@ -10,32 +11,14 @@ const handlers = (
   }
 ) => {
   if (request.url === "/api/users" && request.method === "GET") {
-    response.writeHead(200, APPLICATION_JSON_TYPE);
-    response.end(JSON.stringify(usersData));
+    usersController.getUsers(request, response);
   } else if (
     request.url.startsWith("/api/users/") &&
     request.method === "GET"
   ) {
-    if (!request.url.match(/\/api\/users\/([a-z]+)/)) {
-      response.writeHead(400, APPLICATION_JSON_TYPE);
-      response.end(JSON.stringify({ message: "userId is not a valid uuid" }));
-    } else {
-      const id = request.url.split("/")[3];
-
-      const user = usersData.find((item) => item.id === id);
-      if (!user) {
-        response.writeHead(404, APPLICATION_JSON_TYPE);
-        response.end(
-          JSON.stringify({ message: `user with id: ${id} doesn't exist` })
-        );
-      } else {
-        response.writeHead(200, APPLICATION_JSON_TYPE);
-        response.end(JSON.stringify(user));
-      }
-    }
+    usersController.getUser(request, response);
   } else if (request.url === "/api/users" && request.method === "POST") {
-    response.writeHead(200, APPLICATION_JSON_TYPE);
-    response.end(JSON.stringify(usersData));
+    usersController.createUser(request, response);
   } else {
     response.writeHead(404, APPLICATION_JSON_TYPE);
     response.end(
