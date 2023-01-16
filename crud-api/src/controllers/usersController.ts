@@ -10,7 +10,7 @@ import {
 } from "../utils/validateUser.js";
 
 const uuidRegexExp =
-  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 
 const getUsers = async (
   request: http.IncomingMessage,
@@ -130,4 +130,35 @@ const updateUser = async (
   }
 };
 
-export { getUsers, getUser, createUser, updateUser };
+const deleteUser = (
+  request: http.IncomingMessage,
+  response: http.ServerResponse<http.IncomingMessage> & {
+    req: http.IncomingMessage;
+  }
+) => {
+  try {
+    const id = request.url.split("/")[3];
+    if (!id || !uuidRegexExp.test(id)) {
+      response.writeHead(400, APPLICATION_JSON_TYPE);
+      response.end(JSON.stringify({ message: "userId is not a valid uuid" }));
+    } else {
+      const userIndex = usersData.findIndex((item) => item.id === id);
+      if (userIndex === -1) {
+        response.writeHead(404, APPLICATION_JSON_TYPE);
+        response.end(
+          JSON.stringify({ message: `user with id: ${id} doesn't exist` })
+        );
+      } else {
+        usersData.splice(userIndex, 1);
+        response.writeHead(204, APPLICATION_JSON_TYPE);
+        response.end();
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    response.writeHead(500, APPLICATION_JSON_TYPE);
+    response.end(JSON.stringify({ message: "Internal server error" }));
+  }
+};
+
+export { getUsers, getUser, createUser, updateUser, deleteUser };

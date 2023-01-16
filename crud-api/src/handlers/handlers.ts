@@ -24,6 +24,11 @@ const handlers = (
     request.method === "PUT"
   ) {
     usersController.updateUser(request, response);
+  } else if (
+    request.url.startsWith("/api/users/") &&
+    request.method === "DELETE"
+  ) {
+    usersController.deleteUser(request, response);
   } else {
     response.writeHead(404, APPLICATION_JSON_TYPE);
     response.end(
