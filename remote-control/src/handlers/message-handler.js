@@ -1,4 +1,5 @@
 import { moveMouse } from "../commands/moveMouse.js";
+import { drawCircle } from "../commands/drawCircle.js";
 import { getMousePosition } from "../commands/getMousePosition.js";
 
 export const messageHandler = async (message) => {
@@ -21,6 +22,9 @@ export const messageHandler = async (message) => {
   if (command === "mouse_position") {
     const { xPos, yPos } = await getMousePosition();
     return `${command} ${xPos},${yPos}`;
+  }
+  if (command === "draw_circle") {
+    drawCircle(x);
   }
 
   return message;
