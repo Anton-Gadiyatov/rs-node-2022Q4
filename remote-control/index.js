@@ -1,8 +1,6 @@
-import { Readable } from "node:stream";
 import { httpServer } from "./src/http_server/index.js";
 import { WebSocketServer, createWebSocketStream } from "ws";
-import { messageHandlers } from "./src/handlers/message-handler.js";
-import { mouse, left, right, up, down } from "@nut-tree/nut-js";
+import { messageHandler } from "./src/handlers/message-handler.js";
 
 const HTTP_PORT = 8181;
 
@@ -14,13 +12,14 @@ const wss = new WebSocketServer({ port: 8080 });
 wss.on("connection", (ws) => {
   console.log("connected");
   const stream = createWebSocketStream(ws, { encoding: "utf-8" });
-  stream.on("data", (message) => {
+  stream.on("data", async (message) => {
     let returnMessage = message;
     try {
-      returnMessage = messageHandler(message);
+      returnMessage = await messageHandler(message);
     } catch (err) {
       console.log(err);
     }
+    console.log(returnMessage);
     ws.send(returnMessage);
   });
 

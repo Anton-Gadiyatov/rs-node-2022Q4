@@ -1,6 +1,7 @@
-import { moveMouse } from "../commands/moveMouse";
+import { moveMouse } from "../commands/moveMouse.js";
+import { getMousePosition } from "../commands/getMousePosition.js";
 
-export const messageHandler = (message) => {
+export const messageHandler = async (message) => {
   const [command, ...args] = message.split(" ");
   const x = Number(args[0]);
   const y = Number(args[1]);
@@ -17,5 +18,10 @@ export const messageHandler = (message) => {
   if (command === "mouse_right") {
     moveMouse("right", x);
   }
+  if (command === "mouse_position") {
+    const { xPos, yPos } = await getMousePosition();
+    return `${command} ${xPos},${yPos}`;
+  }
+
   return message;
 };
