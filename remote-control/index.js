@@ -19,7 +19,6 @@ wss.on("connection", (ws) => {
     } catch (err) {
       console.log(err);
     }
-    console.log(returnMessage);
     ws.send(returnMessage);
   });
 

@@ -1,11 +1,4 @@
-import {
-  Button,
-  centerOf,
-  mouse,
-  Point,
-  Region,
-  straightTo,
-} from "@nut-tree/nut-js";
+import { Button, mouse, Point, straightTo } from "@nut-tree/nut-js";
 
 export const drawCircle = async (px) => {
   const { x, y } = await mouse.getPosition();

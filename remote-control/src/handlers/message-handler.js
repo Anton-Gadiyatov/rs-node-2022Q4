@@ -1,5 +1,6 @@
 import { moveMouse } from "../commands/moveMouse.js";
 import { drawCircle } from "../commands/drawCircle.js";
+import { drawRectangle } from "../commands/drawRectangle.js";
 import { getMousePosition } from "../commands/getMousePosition.js";
 
 export const messageHandler = async (message) => {
@@ -25,6 +26,12 @@ export const messageHandler = async (message) => {
   }
   if (command === "draw_circle") {
     drawCircle(x);
+  }
+  if (command === "draw_rectangle") {
+    drawRectangle(x, y);
+  }
+  if (command === "draw_square") {
+    drawRectangle(x);
   }
 
   return message;
