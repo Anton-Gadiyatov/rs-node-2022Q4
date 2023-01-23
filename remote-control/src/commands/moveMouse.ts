@@ -1,6 +1,6 @@
 import { mouse, left, right, up, down } from "@nut-tree/nut-js";
 
-export const moveMouse = async (direction, px) => {
+export const moveMouse = async (direction: string, px: number) => {
   if (direction === "up") {
     await mouse.move(up(px));
   }

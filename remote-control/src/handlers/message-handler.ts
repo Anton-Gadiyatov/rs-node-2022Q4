@@ -1,8 +1,8 @@
-import { moveMouse } from "../commands/moveMouse.js";
 import { drawCircle } from "../commands/drawCircle.js";
-import { printScreen } from "../commands/printScreen.js";
 import { drawRectangle } from "../commands/drawRectangle.js";
 import { getMousePosition } from "../commands/getMousePosition.js";
+import { moveMouse } from "../commands/moveMouse.js";
+import { printScreen } from "../commands/printScreen.js";
 
 export const messageHandler = async (message) => {
   const [command, ...args] = message.split(" ");

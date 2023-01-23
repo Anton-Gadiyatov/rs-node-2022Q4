@@ -1,6 +1,6 @@
 import { Button, mouse, Point, straightTo } from "@nut-tree/nut-js";
 
-export const drawRectangle = async (xPos, yPos) => {
+export const drawRectangle = async (xPos: number, yPos?: number) => {
   const { x, y } = await mouse.getPosition();
   mouse.config.mouseSpeed = 1000;
 
