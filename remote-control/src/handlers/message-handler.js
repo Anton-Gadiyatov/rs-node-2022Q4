@@ -1,5 +1,6 @@
 import { moveMouse } from "../commands/moveMouse.js";
 import { drawCircle } from "../commands/drawCircle.js";
+import { printScreen } from "../commands/printScreen.js";
 import { drawRectangle } from "../commands/drawRectangle.js";
 import { getMousePosition } from "../commands/getMousePosition.js";
 
@@ -32,6 +33,10 @@ export const messageHandler = async (message) => {
   }
   if (command === "draw_square") {
     drawRectangle(x);
+  }
+  if (command === "prnt_scrn") {
+    const screenShot = await printScreen();
+    return `${command} ${screenShot}`;
   }
 
   return message;
